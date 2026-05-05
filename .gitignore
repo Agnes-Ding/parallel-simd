@@ -1,0 +1,13 @@
+*.o
+main
+gauss_solver
+*.swp
+*.swo
+*~
+*.aux
+*.log
+*.out
+*.toc
+*.pdf
+*.synctex.gz
+.DS_Store
