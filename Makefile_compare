@@ -1,0 +1,22 @@
+CXX = g++
+LDFLAGS = -fopenmp
+
+# 手写SIMD版本（-O2，关闭自动向量化）
+hand: main.cc
+	$(CXX) -O2 -fno-tree-vectorize -march=armv8-a+simd -mtune=cortex-a72 $(LDFLAGS) main.cc -o main_hand
+
+# 编译器自动向量化版本（-O3，对纯串行代码）
+auto: main_serial_only.cc
+	$(CXX) -O3 -march=armv8-a+simd -mtune=cortex-a72 $(LDFLAGS) main_serial_only.cc -o main_auto
+
+# 生成汇编对比
+asm_hand:
+	$(CXX) -O2 -fno-tree-vectorize -march=armv8-a+simd -S main.cc -o hand_simd.s
+
+asm_auto:
+	$(CXX) -O3 -march=armv8-a+simd -S main_serial_only.cc -o auto_vec.s
+
+all: hand auto
+
+clean:
+	rm -f main_hand main_auto hand_simd.s auto_vec.s main.o

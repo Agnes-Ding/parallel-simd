@@ -1,13 +1,24 @@
+# 编译产物
 *.o
 main
+main_hand
+main_auto
 gauss_solver
+a.out
+
+# 临时文件
 *.swp
 *.swo
 *~
+
+# LaTeX编译产物
 *.aux
 *.log
 *.out
 *.toc
 *.pdf
 *.synctex.gz
+
+# 系统文件
 .DS_Store
+Thumbs.db
